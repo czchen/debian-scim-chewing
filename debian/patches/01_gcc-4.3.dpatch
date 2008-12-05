@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01_gcc-4.3.dpatch by Andrew Lee <andrew@linux.org.tw>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Solve ftbfs with g++-4.3
+
+@DPATCH@
+diff -urNad scim-chewing-0.3.1~/src/scim_chewing_imengine.cpp scim-chewing-0.3.1/src/scim_chewing_imengine.cpp
+--- scim-chewing-0.3.1~/src/scim_chewing_imengine.cpp	2006-05-30 23:06:34.000000000 +0800
++++ scim-chewing-0.3.1/src/scim_chewing_imengine.cpp	2008-03-05 21:32:10.000000000 +0800
+@@ -49,6 +49,8 @@
+ #include "scim_chewing_imengine.h"
+ #include "scim_chewing_config_entry.h"
+ 
++#include <cstring>
++
+ using namespace scim;
+ 
+ static IMEngineFactoryPointer _scim_chewing_factory( 0 );
+diff -urNad scim-chewing-0.3.1~/src/scim_chewing_imengine_setup.cpp scim-chewing-0.3.1/src/scim_chewing_imengine_setup.cpp
+--- scim-chewing-0.3.1~/src/scim_chewing_imengine_setup.cpp	2006-05-30 23:06:34.000000000 +0800
++++ scim-chewing-0.3.1/src/scim_chewing_imengine_setup.cpp	2008-03-05 21:32:10.000000000 +0800
+@@ -38,6 +38,8 @@
+ #include "scim_chewing_config_entry.h"
+ #include "scim_color_button.h"
+ 
++#include <cstring>
++
+ using namespace scim;
+ 
+ #define scim_module_init chewing_imengine_setup_LTX_scim_module_init
