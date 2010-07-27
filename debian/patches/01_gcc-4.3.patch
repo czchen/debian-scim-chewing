@@ -1,0 +1,24 @@
+Author: Andrew Lee <andrew@linux.org.tw>
+Description: Solve ftbfs with g++-4.3
+--- a/src/scim_chewing_imengine.cpp
++++ b/src/scim_chewing_imengine.cpp
+@@ -53,6 +53,8 @@
+ 
+ #include <cstring>
+ 
++#include <cstring>
++
+ using namespace scim;
+ 
+ static IMEngineFactoryPointer _scim_chewing_factory( 0 );
+--- a/src/scim_chewing_imengine_setup.cpp
++++ b/src/scim_chewing_imengine_setup.cpp
+@@ -41,6 +41,8 @@
+ 
+ #include <cstring>
+ 
++#include <cstring>
++
+ using namespace scim;
+ 
+ #define scim_module_init chewing_imengine_setup_LTX_scim_module_init
