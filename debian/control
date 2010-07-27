@@ -1,17 +1,20 @@
 Source: scim-chewing
 Priority: optional
 Section: utils
-Maintainer: Andrew Lee <andrew@linux.org.tw>
-Build-Depends: debhelper (>= 5.0.0), dpatch, libglib2.0-dev, libgtk2.0-dev, libscim-dev (>= 1.4.6), libchewing3-dev (>= 0.3.2), libtool, intltool, autoconf, automake
+Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
+Build-Depends: debhelper (>= 5.0.0), quilt (>= 0.40), libglib2.0-dev, libgtk2.0-dev, libscim-dev (>= 1.4.6), libchewing3-dev (>= 0.3.2), libtool, intltool, libltdl-dev, autoconf, automake
 Build-Conflicts: autoconf2.13, automake1.4
-Standards-Version: 3.8.0
+Standards-Version: 3.9.0
 Homepage: http://chewing.csie.net
 DM-Upload-Allowed: yes
+Vcs-Git: git://git.debian.org/git/collab-maint/scim-chewing.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/scim-chewing.git;a=summary
+
 
 
 Package: scim-chewing
 Architecture: any
-Depends: ${shlibs:Depends}, scim
+Depends: ${shlibs:Depends}, ${misc:Depends}, scim
 Recommends: ttf-arphic-uming
 Description: Chewing IM engine module for SCIM
  SCIM (Smart Common Input Method) is an input method (IM) platform.

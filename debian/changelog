@@ -1,3 +1,15 @@
+scim-chewing (0.3.3-2) unstable; urgency=low
+
+  * Build-depends on libltdl-dev (Closes:#590417)
+  * Added Vcs-Git and Vcs-Browser tags
+  * Switch to dpkg-source 3.0 (quilt) format
+  * Convert patch from dpatch format to quilt
+  * Update copyright file
+  * Depends on misc:depends 
+  * Bump Standard-version to 3.9.0 
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 27 Jul 2010 14:14:53 -0400
+
 scim-chewing (0.3.3-1) unstable; urgency=low
 
   * New upstream release
