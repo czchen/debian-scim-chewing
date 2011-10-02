@@ -6,8 +6,8 @@ you can use the intelligent ZhuYin input method for Chinese.
 
 How to enable
 -----------------------
-Please follow the instructions at 
-    - /usr/share/doc/scim/README.Debian.gz 
+Please follow the instructions at
+    - /usr/share/doc/scim/README.Debian.gz
 
 Hot keys
 -----------------------
@@ -15,8 +15,8 @@ Control+space:  open/close the input method.
 Space:  select candidate phrase.
 Right/Left Arrow: switch candidate phrase pages.
 Tab:  dispart/connect a phrase.
-Ctrl+1:  select punctuation. 
-  You can also click on scim's brief help button on scim panel for 
+Ctrl+1:  select punctuation.
+  You can also click on scim's brief help button on scim panel for
   other hotkeys information.
 
 News
@@ -37,14 +37,14 @@ You can restart scim by
 	$ pkill scim-launcher ; scim -d
 
 If scim still does not work properly, you have to remove your phrase
-database file ($HOME/.chewing/uhash.dat for libchewing >= 0.3.0 or 
+database file ($HOME/.chewing/uhash.dat for libchewing >= 0.3.0 or
 $HOME/.chewing/hash.dat for older versions) and restart scim.
 Note: you will lose all your personal and favorite phrases this way!
 
 Tips for Han-Yu PinYin keyboard types selection
 -----------------------
 There are a various keyboard types are supported. You can also click
-on scim's setup button on scim panel to launch scim-setup to switch 
+on scim's setup button on scim panel to launch scim-setup to switch
 the keyboard type.
 
 Have fun

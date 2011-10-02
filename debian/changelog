@@ -5,8 +5,8 @@ scim-chewing (0.3.3-2) unstable; urgency=low
   * Switch to dpkg-source 3.0 (quilt) format
   * Convert patch from dpatch format to quilt
   * Update copyright file
-  * Depends on misc:depends 
-  * Bump Standard-version to 3.9.0 
+  * Depends on misc:depends
+  * Bump Standard-version to 3.9.0
 
  -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 27 Jul 2010 14:14:53 -0400
 
@@ -29,7 +29,7 @@ scim-chewing (0.3.2-1) unstable; urgency=low
     - Nederlands translation.
     - Keyboard layout toggle button on toolbar.
     - Added Chinese/English mode fast switch on toolbar.
-    - Sync with libchewing API change. 
+    - Sync with libchewing API change.
   * Bump Standards-Version to 3.8.0
     - Added Homepage
   * debian/control:
@@ -41,11 +41,11 @@ scim-chewing (0.3.2-1) unstable; urgency=low
 scim-chewing (0.3.1-3) unstable; urgency=low
 
   * Update README.Debian(Closes:#427629) for Dan Jacobson
-  * Applied gcc-4.3.dpatch to solve FTBFS (Closes:#441586) by 
+  * Applied gcc-4.3.dpatch to solve FTBFS (Closes:#441586) by
     Cyril Brulebois <cyril.brulebois@enst-bretagne.fr>
   * debian/control:
     - Depends on scim
-    - Bump Standards-Version to 3.7.3 
+    - Bump Standards-Version to 3.7.3
 
  -- Andrew Lee <andrew@linux.org.tw>  Wed, 05 Mar 2008 21:41:07 +0800
 
@@ -66,7 +66,7 @@ scim-chewing (0.3.1-1) unstable; urgency=low
 
   * New upstream release
   * Removed fix_intltool.dpatch (included in upstream)
-  * Added Recommends: ttf-arphic-uming, ttf-arphic-ukai to prevert 
+  * Added Recommends: ttf-arphic-uming, ttf-arphic-ukai to prevert
     display of some missing Chinese characters
   * Stop to rebuild the build system since this version
 
@@ -110,7 +110,7 @@ scim-chewing (0.2.0-3) unstable; urgency=low
   * Build-Depends from scim-dev (>= 1.0.1) to libscim-dev (>= 1.2.0).
   * Now rebuild with scim 1.2.2-0+SVN3
     Build-Depends on scim-dev >= 1.2.2
-  * Minor changes for chewing module install directary in 
+  * Minor changes for chewing module install directary in
     debian/rules and scim-chewing-module-install-dir.dpatch
 
  -- Andrew Lee <andrew@linux.org.tw>  Tue, 21 Jun 2005 15:29:10 +0800
@@ -151,7 +151,7 @@ scim-chewing (0.1.1-2) unstable; urgency=low
 
   * Update README.Debian.
   * debian/control: Add build-depends on libtool, intltool, autoconf,
-    automake1.9 , build-conflicts on autoconf2.13, automake1.4 which 
+    automake1.9 , build-conflicts on autoconf2.13, automake1.4 which
     suggested by autotools-dev and minor changes in descriptions
   * Add scim-chewing.lintian-overrides file
 
@@ -180,7 +180,7 @@ scim-chewing (0.0.cvs20041130-1) unstable; urgency=low
 
 scim-chewing (0.0.cvs20041119-3) unstable; urgency=low
 
-  * Closes: #283218 
+  * Closes: #283218
 
  -- Andrew Lee <andrew@linux.org.tw>  Sat, 27 Nov 2004 19:21:36 +0800
 
