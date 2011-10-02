@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/chewing/!svn/ver/1040/scim-chewing/trunk/po
+END
+LINGUAS
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/chewing/!svn/ver/805/scim-chewing/trunk/po/LINGUAS
+END
+nl.po
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/chewing/!svn/ver/1040/scim-chewing/trunk/po/nl.po
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/chewing/!svn/ver/667/scim-chewing/trunk/po/ChangeLog
+END
+zh_TW.po
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/chewing/!svn/ver/1015/scim-chewing/trunk/po/zh_TW.po
+END
+POTFILES.in
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/chewing/!svn/ver/116/scim-chewing/trunk/po/POTFILES.in
+END
