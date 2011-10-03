@@ -1,3 +1,21 @@
+scim-chewing (0.3.4-1) unstable; urgency=low
+
+  * Imported Upstream version 0.3.4. (Closes: #642077)
+  * Build-depends on libchewing 0.3.3.
+  * Bumpped Standard-Version to 3.9.2.
+  * Removing useless whitespaces at EOL and EOF.
+  * Using debhelper 8.
+  * Drop quilt from build-depends: since it's source format 3.0 (quilt).
+  * Rewritten and compacting debian/rules file.
+  * Sorting build-depends.
+  * Warpping build-depends.
+  * Clean up watch file.
+  * Using watch format version 3.
+  * Removing patches: included in upstream.
+  * Adjust lintian-overrides for a long-standing bug in debhelper.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Mon, 03 Oct 2011 14:00:34 +0800
+
 scim-chewing (0.3.3-2) unstable; urgency=low
 
   * Build-depends on libltdl-dev (Closes:#590417)
