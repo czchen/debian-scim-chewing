@@ -3,3 +3,11 @@
 # a name of a project.
 #
 scim-chewing: description-synopsis-starts-with-a-capital-letter
+
+#
+# These are long-standing bug in debhelper (#204975) that makes lintian
+# trigger these tags
+#
+scim-chewing: pkg-has-shlibs-control-file-but-no-actual-shared-libs
+scim-chewing: postinst-has-useless-call-to-ldconfig
+scim-chewing: postrm-has-useless-call-to-ldconfig
