@@ -3,7 +3,7 @@ Priority: optional
 Section: utils
 Maintainer: Andrew Lee (李健秋) <ajqlee@debian.org>
 Build-Depends:
- debhelper (>= 8), autoconf, automake, intltool, libchewing3-dev (>= 0.3.3),
+ debhelper (>= 9), autoconf, automake, intltool, libchewing3-dev (>= 0.3.3),
  libglib2.0-dev, libgtk2.0-dev, libltdl-dev, libscim-dev (>= 1.4.6), libtool
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.2
