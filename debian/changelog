@@ -1,3 +1,13 @@
+scim-chewing (0.3.4-3) unstable; urgency=low
+
+  * Updating package to debhelper version 9.
+  * Updating package to standards version 3.9.3.
+  * Switching to xz compression for both the source and the binary packages.
+  * Build-depends on libgtk-3-dev. (Closes: #679802)
+  * Drop libgtk2.0-dev from build-depends.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Sun, 08 Jul 2012 01:58:16 +0800
+
 scim-chewing (0.3.4-2) unstable; urgency=low
 
   * Add gtk patch. Thanks Tz-Huan Huang <tzhuan@gmail.com> from upstream.
