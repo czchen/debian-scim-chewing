@@ -7,8 +7,8 @@
 override_dh_auto_install:
 	dh_auto_install
 	# Clean up unnecessary static libraries for modules
-	rm debian/scim-chewing/usr/lib/scim-1.0/*/*/*.a
-	rm debian/scim-chewing/usr/lib/scim-1.0/*/*/*.la
+	rm debian/scim-chewing/usr/lib/*/scim-1.0/*/*/*.a
+	rm debian/scim-chewing/usr/lib/*/scim-1.0/*/*/*.la
 
 override_dh_auto_test:
         # Disabled: Incompelete in po/

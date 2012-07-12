@@ -16,6 +16,7 @@ Vcs-Browser: http://git.debian.org/?p=collab-maint/scim-chewing.git;a=summary
 
 Package: scim-chewing
 Architecture: any
+Multi-Arch: same
 Depends: ${shlibs:Depends}, ${misc:Depends}, scim
 Recommends: ttf-arphic-uming
 Description: Chewing IM engine module for SCIM
