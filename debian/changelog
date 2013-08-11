@@ -1,3 +1,9 @@
+scim-chewing (0.3.4-4) unstable; urgency=low
+
+  * Added multi-arch support and update path in rules file.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Tue, 07 Aug 2012 22:20:59 +0800
+
 scim-chewing (0.3.4-3) unstable; urgency=low
 
   * Updating package to debhelper version 9.
