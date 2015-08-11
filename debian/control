@@ -18,7 +18,7 @@ Build-Depends: debhelper (>= 9),
 Build-Conflicts: autoconf2.13, automake1.4
 Standards-Version: 3.9.3
 Homepage: http://chewing.csie.net
-Vcs-Git: git://git.debian.org/git/pkg-ime/scim-chewing.git
+Vcs-Git: git://anonscm.debian.org/pkg-ime/scim-chewing.git
 Vcs-Browser: http://anonscm.debian.org/cgit/pkg-ime/scim-chewing.git
 
 
