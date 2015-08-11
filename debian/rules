@@ -4,6 +4,9 @@
 %:
 	dh $@ --with autoreconf
 
+override_dh_autoreconf:
+	dh_autoreconf $(CURDIR)/autogen.sh
+
 override_dh_auto_install:
 	dh_auto_install
 	# Clean up unnecessary static libraries for modules
