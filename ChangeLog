@@ -1,3 +1,87 @@
+2012-12-31  Jim Huang <jserv@0xlab.org>
+
+	* NEWS, configure.ac: Bump version to 0.3.5
+
+2012-12-31  Jim Huang <jserv@0xlab.org>
+
+	* NEWS, po/nl.po, po/zh_TW.po, src/scim_chewing_imengine_setup.cpp: 
+	Support THL (Taiwan Huayu Luomapinyin) and MPS2 Pinyin keyboard
+
+2012-12-31  Jim Huang <jserv@0xlab.org>
+
+	* configure.ac: Depends on libchewing-0.3.4 for new features
+
+2012-12-31  Jim Huang <jserv@0xlab.org>
+
+	* src/scim_chewing_imengine_setup.cpp: Unify the GTK_CHECK_VERSION
+	checking
+
+2012-12-21  Jim Huang <jserv@0xlab.org>
+
+	* po/nl.po, po/zh_TW.po: Update po files
+
+2012-12-12  Jim Huang <jserv@0xlab.org>
+
+	* src/scim_chewing_imengine.cpp: Rewrite match_key_event with
+	SCIM_KEY_ReleaseMask
+
+2012-09-17  Jim Huang <jserv@0xlab.org>
+
+	* NEWS: fix typo
+
+2012-09-17  Jim Huang <jserv@0xlab.org>
+
+	* NEWS: update NEWS
+
+2012-09-17  Jim Huang <jserv@0xlab.org>
+
+	* src/scim_chewing_imengine_setup.cpp: Handle translated Chi-Eng
+	mode switch properly
+
+2012-09-17  Jim Huang <jserv@0xlab.org>
+
+	* src/scim_chewing_imengine_setup.cpp: bump copyright date
+
+2012-07-06  Jim Huang <jserv@0xlab.org>
+
+	* AUTHORS: Add Tz-Huan Huang in developer list Contributions for Gtk+ 3.x support
+
+2012-07-05  Jim Huang <jserv@0xlab.org>
+
+	* : Merge pull request #1 from tzhuan/develop Migration to gtk3
+
+2012-07-01  Tz-Huan Huang <tzhuan@gmail.com>
+
+	* src/scim_chewing_imengine_setup.cpp: Set tooltip/editable on
+	GtkComboBox's entry widget.
+
+2012-07-01  Tz-Huan Huang <tzhuan@gmail.com>
+
+	* src/scim_color_button.cpp: Fix color parsing bug.
+
+2012-06-30  Tz-Huan Huang <tzhuan@gmail.com>
+
+	* src/scim_chewing_imengine_setup.cpp, src/scim_color_button.cpp: 
+	Fix some bugs.
+
+2012-06-30  Tz-Huan Huang <tzhuan@gmail.com>
+
+	* src/scim_chewing_imengine_setup.cpp, src/scim_color_button.cpp,
+	src/scim_color_button.h: Make scim-chewing build-able with gtk3.
+
+2011-03-03  Jim Huang <jserv@0xlab.org>
+
+	* autogen.sh: Update automake to version 1.11
+
+2011-03-03  Jim Huang <jserv@0xlab.org>
+
+	* autogen.sh: Touch ChangeLog to satisfy autotool ChangeLog is deprecated, but autotool expects one in source
+	directory.
+
+2011-03-01  Jim Huang <jserv@0xlab.org>
+
+	* Update contact list
+
 2011-02-27  Jim Huang  <jserv@0xlab.org>
 
 	* configure.ac: Bump version to 0.3.4

@@ -6,7 +6,7 @@
  * SCIM-chewing -
  *	Intelligent Chinese Phonetic IM Engine for SCIM.
  *
- * Copyright (c) 2005, 2006, 2008
+ * Copyright (c) 2005, 2006, 2008, 2012
  *	SCIM-chewing Developers. See ChangeLog for details.
  *
  * See the file "COPYING" for information on usage and redistribution
@@ -40,6 +40,28 @@
 #include "scim_color_button.h"
 
 #include <cstring>
+
+#if !GTK_CHECK_VERSION(2, 12, 0)
+    #define SCIM_TABLES_USE_GTK_TOOLTIPS
+#endif
+
+#if !GTK_CHECK_VERSION(2, 22, 0)
+    #define SCIM_TABLES_USE_GTK_DIALOG_SEPARATOR
+#endif
+
+#if GTK_CHECK_VERSION(2, 14, 0)
+    #define SCIM_TABLES_USE_GTK_DIALOG_GET_CONTENT_AREA
+    #define SCIM_TABLES_USE_GTK_DIALOG_GET_ACTION_AREA
+#endif
+
+#if GTK_CHECK_VERSION(2, 18, 0)
+    #define SCIM_TABLES_USE_GTK_WIDGET_GET_CAN_DEFAULT
+#endif
+
+#if GTK_CHECK_VERSION(3, 0, 0)
+    #define SCIM_TABLES_USE_GTK_BOX
+    #define SCIM_TABLES_USE_GTK_FILE_CHOOSER
+#endif
 
 using namespace scim;
 
@@ -165,7 +187,9 @@ static GList *selKey_type_list = 0;
 static GList *selKey_num_list = 0;
 static GList *chieng_mode_list = 0;
 // static GtkWidget    * __widget_show_candidate_comment= 0;
+#ifdef SCIM_TABLES_USE_GTK_TOOLTIPS
 static GtkTooltips  * __widget_tooltips              = 0;
+#endif
 
 static KeyboardConfigData __config_keyboards[] =
 {
@@ -233,8 +257,8 @@ static ColorConfigData config_color_common[] = {
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_ "_1",
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_1,
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_1,
-        N_("Color #1"),
-        N_("The color of preediting text"),
+        _("Color #1"),
+        _("The color of preediting text"),
         NULL,
         false
     },
@@ -246,8 +270,8 @@ static ColorConfigData config_color_common[] = {
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_ "_2",
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_2,
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_2,
-        N_("Color #2"),
-        N_("The color of preediting text"),
+        _("Color #2"),
+        _("The color of preediting text"),
         NULL,
         false
     },
@@ -259,8 +283,8 @@ static ColorConfigData config_color_common[] = {
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_ "_3",
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_3,
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_3,
-        N_("Color #3"),
-        N_("The color of preediting text"),
+        _("Color #3"),
+        _("The color of preediting text"),
         NULL,
         false
     },
@@ -272,8 +296,8 @@ static ColorConfigData config_color_common[] = {
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_ "_4",
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_4,
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_4,
-        N_("Color #4"),
-        N_("The color of preediting text"),
+        _("Color #4"),
+        _("The color of preediting text"),
         NULL,
         false
     },
@@ -285,8 +309,8 @@ static ColorConfigData config_color_common[] = {
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_ "_5",
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_5,
         SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_DEF_5,
-        N_("Color #5"),
-        N_("The color of preediting text"),
+        _("Color #5"),
+        _("The color of preediting text"),
         NULL,
         false
     }
@@ -322,7 +346,11 @@ static GtkWidget *create_options_page()
 {
 	GtkWidget *vbox;
 
+#ifdef SCIM_TABLES_USE_GTK_BOX
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
 	vbox = gtk_vbox_new (FALSE, 0);
+#endif
 	gtk_widget_show (vbox);
 
 	__widget_add_phrase_forward =
@@ -336,9 +364,17 @@ static GtkWidget *create_options_page()
 			G_CALLBACK( on_default_toggle_button_toggled ),
 			&__config_add_phrase_forward );
 
+	const gchar *show_add_phrase_forward_tooltip =
+		_( "Whether to add Phrase forward or not." );
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(
+			__widget_add_phrase_forward,
+			show_add_phrase_forward_tooltip);
+#else
 	gtk_tooltips_set_tip(
 			__widget_tooltips, __widget_add_phrase_forward,
-			_( "Whether to add Phrase forward or not." ), NULL );
+			show_add_phrase_forward_tooltip, NULL);
+#endif
 
 	__widget_phrase_choice_rearward =
 		gtk_check_button_new_with_mnemonic( _( "_Rearward phrase choice" ) );
@@ -351,9 +387,17 @@ static GtkWidget *create_options_page()
 			G_CALLBACK( on_default_toggle_button_toggled ),
 			&__config_phrase_choice_rearward );
 
+	const gchar *show_phrase_choice_rearward_tooltip =
+		_( "The behavior for phrase choice to be rearward or not." );
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(
+			__widget_phrase_choice_rearward,
+			show_phrase_choice_rearward_tooltip);
+#else
 	gtk_tooltips_set_tip(
 			__widget_tooltips, __widget_phrase_choice_rearward,
-			_( "The behavior for phrase choice to be rearward or not." ), NULL );
+			show_phrase_choice_rearward_tooltip, NULL);
+#endif
 
 	__widget_auto_shift_cursor =
 		gtk_check_button_new_with_mnemonic( _( "_Automatically shift cursor" ) );
@@ -366,9 +410,17 @@ static GtkWidget *create_options_page()
 			G_CALLBACK( on_default_toggle_button_toggled ),
 			&__config_auto_shift_cursor );
 
+	const gchar *show_auto_shift_cursor_tooltip =
+		( "Automatically shift cursor after selection." );
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(
+			__widget_auto_shift_cursor,
+			show_auto_shift_cursor_tooltip);
+#else
 	gtk_tooltips_set_tip(
 			__widget_tooltips, __widget_auto_shift_cursor,
-			_( "Automatically shift cursor after selection." ), NULL );
+			show_auto_shift_cursor_tooltip, NULL);
+#endif
 
 	__widget_esc_clean_all_buffer =
 		gtk_check_button_new_with_mnemonic(_( "_Esc key to clean all buffer" ) );
@@ -381,9 +433,17 @@ static GtkWidget *create_options_page()
 			G_CALLBACK( on_default_toggle_button_toggled ),
 			&__config_esc_clean_all_buffer );
 
+	const gchar *show_esc_clean_all_buffer_tooltip =
+		_( "Assign Esc key to clean all keyboard buffer or not." );
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(
+			__widget_esc_clean_all_buffer,
+			show_esc_clean_all_buffer_tooltip);
+#else
 	gtk_tooltips_set_tip(
 			__widget_tooltips, __widget_esc_clean_all_buffer,
-			_( "Assign Esc key to clean all keyboard buffer or not." ), NULL );
+			show_esc_clean_all_buffer_tooltip, NULL);
+#endif
 
 	__widget_space_as_selection = 
 		gtk_check_button_new_with_mnemonic( _( "_SpaceKey as selection key" ) );
@@ -396,9 +456,17 @@ static GtkWidget *create_options_page()
 			G_CALLBACK( on_default_toggle_button_toggled ),
 			&__config_space_as_selection );
 
+	const gchar *show_space_as_selection_tooltip =
+		_( "Whether SpaceKey is used as selection key or not." );
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(
+			__widget_space_as_selection,
+			show_space_as_selection_tooltip);
+#else
 	gtk_tooltips_set_tip(
 			__widget_tooltips, __widget_space_as_selection,
-			_( "Whether SpaceKey is used as selection key or not." ), NULL );
+			show_space_as_selection_tooltip, NULL);
+#endif
 
 	return vbox;
 }
@@ -436,7 +504,13 @@ struct _builtin_keymap {
 			String( _( "DACHEN_CP26 Keyboard") ) },
 		{
 			"KB_HANYU_PINYIN",
-			String( _( "Han-Yu PinYin Keyboard" ) ) }
+			String( _( "Han-Yu PinYin Keyboard" ) ) },
+		{
+			"KB_THL",
+			String( _( "Taiwan Huayu Luomapinyin Keyboard" ) ) },
+		{
+			"KB_MPS2",
+			String( _( "MPS2 PinYin Keyboard"  ) ) },
 };
 
 static const char *builtin_selectkeys[] = {
@@ -457,9 +531,12 @@ static const char *builtin_selectkeys_num[] = {
 	"5"
 };
 
-static const char *builtin_chieng_mode[] = {
-	"Chi",
-	"Eng"
+static const struct _builtin_chieng_mode {
+	const char *entry;
+	const char *translated_name;
+} builtin_chieng_mode[] = {
+	{ "Chi", _( "Chi" ) },
+	{ "Eng", _( "Eng" ) }
 };
 
 static GtkWidget *create_keyboard_page()
@@ -487,7 +564,7 @@ static GtkWidget *create_keyboard_page()
 		gtk_table_attach (GTK_TABLE (table), __config_keyboards [i].entry, 1, 2, i, i+1,
 				(GtkAttachOptions) (GTK_FILL|GTK_EXPAND),
 				(GtkAttachOptions) (GTK_FILL), 4, 4);
-		gtk_entry_set_editable (GTK_ENTRY (__config_keyboards[i].entry), FALSE);
+		gtk_editable_set_editable (GTK_EDITABLE (__config_keyboards[i].entry), FALSE);
 
 		__config_keyboards[i].button = gtk_button_new_with_label ("...");
 		gtk_widget_show (__config_keyboards[i].button);
@@ -508,26 +585,46 @@ static GtkWidget *create_keyboard_page()
 	}
 
 	for (i = 0; __config_keyboards [i].key; ++ i) {
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+		gtk_widget_set_tooltip_text(__config_keyboards [i].entry,
+				_(__config_keyboards [i].tooltip));
+#else
 		gtk_tooltips_set_tip (__widget_tooltips, __config_keyboards [i].entry,
 				_(__config_keyboards [i].tooltip), NULL);
+#endif
 	}
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	__widget_chieng_mode = gtk_combo_box_text_new_with_entry();
+#else
 	// Setup chieng_mode combo box
 	__widget_chieng_mode = gtk_combo_new();
+#endif
 	gtk_widget_show (__widget_chieng_mode);
 
 	for (i = 0; 
 			i < (sizeof(builtin_chieng_mode) / sizeof(builtin_chieng_mode[0])); 
 			i++) {
+#if GTK_CHECK_VERSION(2, 4, 0)
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(__widget_chieng_mode),
+				builtin_chieng_mode[ i ].translated_name );
+#else
 		chieng_mode_list = g_list_append(
 				chieng_mode_list,
-				(void *) builtin_chieng_mode[ i ] );
+				(void *) builtin_chieng_mode[ i ].translated_name );
+#endif
 	}
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_editable_set_editable (
+		GTK_EDITABLE (gtk_bin_get_child (GTK_BIN (__widget_chieng_mode))),
+		FALSE);
+#else
 	gtk_combo_set_popdown_strings (GTK_COMBO (__widget_chieng_mode), chieng_mode_list);
 	g_list_free(chieng_mode_list);
 	gtk_combo_set_use_arrows (GTK_COMBO (__widget_chieng_mode), TRUE);
 	gtk_editable_set_editable (GTK_EDITABLE (GTK_ENTRY (GTK_COMBO (__widget_chieng_mode)->entry)), FALSE);
+#endif
 	label = gtk_label_new (_("Initial trigger Chinese/English mode:"));
 	gtk_widget_show (label);
 	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
@@ -538,30 +635,58 @@ static GtkWidget *create_keyboard_page()
 	gtk_table_attach (GTK_TABLE (table), __widget_chieng_mode, 1, 2, 2, 3,
 			(GtkAttachOptions) (GTK_FILL|GTK_EXPAND),
 			(GtkAttachOptions) (GTK_FILL), 4, 4);
+
+	const gchar *show_chieng_mode_tooltip =
+		_("Change the default Chinese/English mode on every trigger");
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(
+			gtk_bin_get_child (GTK_BIN (__widget_chieng_mode)),
+			show_chieng_mode_tooltip);
+#else
 	gtk_tooltips_set_tip (__widget_tooltips, GTK_COMBO (__widget_chieng_mode)->entry,
-			_("Change the default Chinese/English mode on every trigger"), NULL);
+			show_chieng_mode_tooltip, NULL);
+#endif
 	g_signal_connect(
+#if GTK_CHECK_VERSION(2, 4, 0)
+			G_OBJECT (gtk_bin_get_child (GTK_BIN (__widget_chieng_mode))),
+#else
 			(gpointer) GTK_ENTRY(GTK_COMBO(__widget_chieng_mode)->entry), 
+#endif
 			"changed",
 			G_CALLBACK (on_default_editable_changed),
 			&(__config_chieng_mode_data));
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	__widget_selKey_num = gtk_combo_box_text_new_with_entry();
+#else
 	// Setup selKey_num combo box
 	__widget_selKey_num = gtk_combo_new();
+#endif
 	gtk_widget_show (__widget_selKey_num);
 
 	for (i = 0; 
 	     i < (sizeof(builtin_selectkeys_num) / sizeof(builtin_selectkeys_num[0])); 
 	     i++) {
+#if GTK_CHECK_VERSION(2, 4, 0)
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(__widget_selKey_num),
+				builtin_selectkeys_num[ i ] );
+#else
 		selKey_num_list = g_list_append(
 				selKey_num_list,
 				(void *) builtin_selectkeys_num[ i ] );
+#endif
 	}
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_editable_set_editable (
+		GTK_EDITABLE (gtk_bin_get_child (GTK_BIN (__widget_selKey_num))),
+		FALSE);
+#else
 	gtk_combo_set_popdown_strings (GTK_COMBO (__widget_selKey_num), selKey_num_list);
 	g_list_free(selKey_num_list);
 	gtk_combo_set_use_arrows (GTK_COMBO (__widget_selKey_num), TRUE);
 	gtk_editable_set_editable (GTK_EDITABLE (GTK_ENTRY (GTK_COMBO (__widget_selKey_num)->entry)), FALSE);
+#endif
 	label = gtk_label_new (_("Number of Selection Keys :"));
 	gtk_widget_show (label);
 	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
@@ -572,30 +697,55 @@ static GtkWidget *create_keyboard_page()
 	gtk_table_attach (GTK_TABLE (table), __widget_selKey_num, 1, 2, 3, 4,
 			(GtkAttachOptions) (GTK_FILL|GTK_EXPAND),
 			(GtkAttachOptions) (GTK_FILL), 4, 4);
+
+	const gchar *show_selKey_num_tooltip =
+		_("Change the default number of selection keys");
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(gtk_bin_get_child (GTK_BIN (__widget_selKey_num)),
+			show_selKey_num_tooltip);
+#else
 	gtk_tooltips_set_tip (__widget_tooltips, GTK_COMBO (__widget_selKey_num)->entry,
-			_("Change the default number of selection keys"), NULL);
+			show_selKey_num_tooltip, NULL);
+#endif
 	g_signal_connect(
+#if GTK_CHECK_VERSION(2, 4, 0)
+			G_OBJECT(gtk_bin_get_child(GTK_BIN(__widget_selKey_num))),
+#else
 			(gpointer) GTK_ENTRY(GTK_COMBO(__widget_selKey_num)->entry), 
+#endif
 			"changed",
 			G_CALLBACK (on_default_editable_changed),
 			&(__config_selKey_num_data));
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	__widget_selKey_type = gtk_combo_box_text_new_with_entry();
+#else
 	// Setup selKey combo box
 	__widget_selKey_type = gtk_combo_new();
+#endif
 	gtk_widget_show (__widget_selKey_type);
 
 	for (i = 0;
 	     i < (sizeof(builtin_selectkeys) / sizeof(builtin_selectkeys[0]));
 	     i++) {
+#if GTK_CHECK_VERSION(2, 4, 0)
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(__widget_selKey_type),
+				builtin_selectkeys[ i ] );
+#else
 		selKey_type_list = g_list_append(
 				selKey_type_list,
 				(void *) builtin_selectkeys[ i ] );
+#endif
 	}
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_editable_set_editable (GTK_EDITABLE (gtk_bin_get_child (GTK_BIN (__widget_selKey_type))), FALSE);
+#else
 	gtk_combo_set_popdown_strings (GTK_COMBO (__widget_selKey_type), selKey_type_list);
 	g_list_free(selKey_type_list);
 	gtk_combo_set_use_arrows (GTK_COMBO (__widget_selKey_type), TRUE);
 	gtk_editable_set_editable (GTK_EDITABLE (GTK_ENTRY (GTK_COMBO (__widget_selKey_type)->entry)), FALSE);
+#endif
 	label = gtk_label_new (_("Customized Selection Keys:"));
 	gtk_widget_show (label);
 	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
@@ -606,30 +756,57 @@ static GtkWidget *create_keyboard_page()
 	gtk_table_attach (GTK_TABLE (table), __widget_selKey_type, 1, 2, 4, 5,
 			(GtkAttachOptions) (GTK_FILL|GTK_EXPAND),
 			(GtkAttachOptions) (GTK_FILL), 4, 4);
+
+	const gchar *show_selKey_type_tooltip =
+		_("Change the default selection keys");
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(gtk_bin_get_child (GTK_BIN (__widget_selKey_type)),
+			show_selKey_type_tooltip);
+#else
 	gtk_tooltips_set_tip (__widget_tooltips, GTK_COMBO (__widget_selKey_type)->entry,
-			_("Change the default selection keys"), NULL);
+			show_selKey_type_tooltip, NULL);
+#endif
 	g_signal_connect(
+#if GTK_CHECK_VERSION(2, 4, 0)
+			G_OBJECT(gtk_bin_get_child(GTK_BIN(__widget_selKey_type))),
+#else
 			(gpointer) GTK_ENTRY(GTK_COMBO(__widget_selKey_type)->entry),
+#endif
 			"changed",
 			G_CALLBACK (on_default_editable_changed),
 			&(__config_selKey_type_data));
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	__widget_kb_type = gtk_combo_box_text_new_with_entry();
+#else
 	// Setup KB_TYPE combo box
 	__widget_kb_type = gtk_combo_new();
+#endif
 	gtk_widget_show (__widget_kb_type);
 
 	for (i = 0;
 	     i < (int) (sizeof(builtin_keymaps) / sizeof(_builtin_keymap));
 	     i++) {
+#if GTK_CHECK_VERSION(2, 4, 0)
+		gtk_combo_box_text_append_text(
+				GTK_COMBO_BOX_TEXT(__widget_kb_type), 
+				builtin_keymaps[ i ].translated_name.c_str() );
+#else
 		kb_type_list = g_list_append(
 				kb_type_list,
 				(void *) builtin_keymaps[ i ].translated_name.c_str() );
+#endif
 	}
 
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_editable_set_editable (GTK_EDITABLE (gtk_bin_get_child (GTK_BIN (__widget_kb_type))), FALSE);
+#else
 	gtk_combo_set_popdown_strings (GTK_COMBO (__widget_kb_type), kb_type_list);
 	g_list_free(kb_type_list);
 	gtk_combo_set_use_arrows (GTK_COMBO (__widget_kb_type), TRUE);
 	gtk_editable_set_editable (GTK_EDITABLE (GTK_ENTRY (GTK_COMBO (__widget_kb_type)->entry)), FALSE);
+#endif
+
 	label = gtk_label_new (_("Use keyboard type:"));
 	gtk_widget_show (label);
 	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
@@ -640,10 +817,22 @@ static GtkWidget *create_keyboard_page()
 	gtk_table_attach (GTK_TABLE (table), __widget_kb_type, 1, 2, 5, 6,
 			(GtkAttachOptions) (GTK_FILL|GTK_EXPAND),
 			(GtkAttachOptions) (GTK_FILL), 4, 4);
+
+	const gchar *show_kb_type_tooltip =
+		_("Change the default keyboard layout type");
+#ifndef SCIM_TABLES_USE_GTK_TOOLTIPS
+	gtk_widget_set_tooltip_text(gtk_bin_get_child (GTK_BIN (__widget_kb_type)),
+			show_kb_type_tooltip);
+#else
 	gtk_tooltips_set_tip (__widget_tooltips, GTK_COMBO (__widget_kb_type)->entry,
-			_("Change the default keyboard layout type"), NULL);
+			show_kb_type_tooltip, NULL);
+#endif
 	g_signal_connect(
+#if GTK_CHECK_VERSION(2, 4, 0)
+			G_OBJECT(gtk_bin_get_child(GTK_BIN(__widget_kb_type))),
+#else
 			(gpointer) GTK_ENTRY(GTK_COMBO(__widget_kb_type)->entry),
+#endif
 			"changed",
 			G_CALLBACK (on_default_editable_changed),
 			&(__config_kb_type_data_translated));
@@ -661,7 +850,11 @@ static GtkWidget *create_color_button_page()
 	gtk_widget_show (table);
 
 	for (int i = 0; i < SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_NUM; i++) {
+#ifdef SCIM_TABLES_USE_GTK_BOX
+		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
 		hbox = gtk_hbox_new (FALSE, 0);
+#endif
 		gtk_widget_show (hbox);
 		sprintf(color_button_name_string, 
 			SCIM_CONFIG_IMENGINE_CHEWING_PREEDIT_BGCOLOR_ "_%d", i + 1);
@@ -684,7 +877,9 @@ static GtkWidget *create_setup_window()
 		GtkWidget *label;
 		GtkWidget *page;
 
+#ifdef SCIM_TABLES_USE_GTK_TOOLTIPS
 		__widget_tooltips = gtk_tooltips_new ();
+#endif
 
 		// Create the Notebook.
 		notebook = gtk_notebook_new ();
@@ -788,10 +983,14 @@ void setup_widget_value()
 	if (index_keymap < 0)
 		index_keymap = 0;
 	
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_combo_box_set_active(GTK_COMBO_BOX(__widget_kb_type), index_keymap);
+#else
 	gtk_entry_set_text (
 			GTK_ENTRY(GTK_COMBO(__widget_kb_type)->entry),
 			builtin_keymaps[index_keymap].translated_name.c_str()
 	);
+#endif
 
 	/* selKey */
 	int index_selectkeys = sizeof(builtin_selectkeys) / sizeof(builtin_selectkeys[0]) - 1;
@@ -804,10 +1003,14 @@ void setup_widget_value()
 	if (index_selectkeys < 0)
 		index_selectkeys = 0;
 	
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_combo_box_set_active(GTK_COMBO_BOX(__widget_selKey_type), index_selectkeys);
+#else
 	gtk_entry_set_text (
 		GTK_ENTRY(GTK_COMBO(__widget_selKey_type)->entry),
 		builtin_selectkeys[index_selectkeys]
 	);
+#endif
 
 	/* selKey_num */
 	int index_selectkeys_num =
@@ -821,27 +1024,35 @@ void setup_widget_value()
 	if (index_selectkeys_num < 0)
 		index_selectkeys_num = 0;
 	
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_combo_box_set_active(GTK_COMBO_BOX(__widget_selKey_num), index_selectkeys_num);
+#else
 	gtk_entry_set_text (
 		GTK_ENTRY(GTK_COMBO(__widget_selKey_num)->entry),
 		builtin_selectkeys_num[index_selectkeys_num]
 	);
+#endif
 
 	/* chieng_mode */
 	int index_chieng_mode =
 		sizeof(builtin_chieng_mode) / sizeof(builtin_chieng_mode[0]) - 1;
 	for ( ; index_chieng_mode >= 0;  index_chieng_mode--) {
 		if ( __config_chieng_mode_data ==
-			builtin_chieng_mode[index_chieng_mode]) {
+			builtin_chieng_mode[index_chieng_mode].entry) {
 			break;
 		}
 	}
 	if (index_chieng_mode < 0)
 		index_chieng_mode = 0;
 	
+#if GTK_CHECK_VERSION(2, 4, 0)
+	gtk_combo_box_set_active(GTK_COMBO_BOX(__widget_chieng_mode), index_chieng_mode);
+#else
 	gtk_entry_set_text (
 		GTK_ENTRY(GTK_COMBO(__widget_chieng_mode)->entry),
-		builtin_chieng_mode[index_chieng_mode]
+		builtin_chieng_mode[index_chieng_mode].translated_name
 	);
+#endif
 }
 
 void load_config( const ConfigPointer &config )
@@ -975,14 +1186,17 @@ void save_config( const ConfigPointer &config )
 			sizeof(builtin_chieng_mode) / sizeof(builtin_chieng_mode[0]) - 1;
 		for ( ; index_chieng_mode >= 0; index_chieng_mode--) {
 			if (__config_chieng_mode_data ==
-			    builtin_chieng_mode[index_chieng_mode]) {
+			    builtin_chieng_mode[index_chieng_mode].entry ||
+			    __config_chieng_mode_data ==
+			    builtin_chieng_mode[index_chieng_mode].translated_name
+			    ) {
 				break;
 			}
 		}
 		if (index_chieng_mode < 0)
 			index_chieng_mode = 0;
 		__config_chieng_mode_data =
-			builtin_chieng_mode[index_chieng_mode];
+			builtin_chieng_mode[index_chieng_mode].entry;
 
 		config->write (String (SCIM_CONFIG_IMENGINE_CHEWING_CHI_ENG_MODE)		               , __config_chieng_mode_data);
 
@@ -1087,7 +1301,11 @@ static GtkWidget *create_color_button (const char *config_key)
 	if (!entry)
 		return NULL;
 
+#ifdef SCIM_TABLES_USE_GTK_BOX
+	GtkWidget *hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
 	GtkWidget *hbox = gtk_hbox_new (FALSE, 0);
+#endif
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 4);
 	gtk_widget_show (hbox);
 

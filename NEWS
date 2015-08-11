@@ -1,3 +1,11 @@
+What's New in SCIM-chewing 0.3.5
+---------------------------------------------------------
+* Gtk+ 3.x support
+* Handle translated Chi-Eng mode switch properly
+* Fix incorrect color cand problem
+* Support THL (Taiwan Huayu Luomapinyin) and MPS2 Pinyin keyboard
+
+
 What's New in SCIM-chewing 0.3.4
 ---------------------------------------------------------
 * Handle 0-9, "+-*/" keys, Enter and '.' in keypad.
