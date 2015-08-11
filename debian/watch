@@ -1,2 +1,2 @@
 version=3
-http://chewing.csie.net/download/scim/scim-chewing-([\d\.]*)\.tar\.(bz2|gz)
+https://github.com/chewing/scim-chewing/releases .*/v?(\d\S*)/scim-chewing-(?:\d\S*)\.(?:zip|tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
