@@ -1,17 +1,22 @@
 scim-chewing (0.3.5-1) unstable; urgency=medium
 
-  * New upstream release
-  * Bump Standards-Version to 3.9.6
-  * Change maintainer to IME Packaging Team
-    * Update Vcs-*
-  * Update patches
-    * Remove upstream applied gtk.patch
+  [ ChangZhuo Chen (陳昌倬) ]
+  * New upstream release.
+  * Bump Standards-Version to 3.9.6.
+  * Change maintainer to IME Packaging Team:
+    * Update Vcs-*.
+  * Update patches:
+    * Remove upstream applied gtk.patch.
     * Update 0001-Change-libchewing-requirement-to-0.3.5.patch for
-      dh-autoreconf
-  * Use dh-autoreconf
-  * Use GitHub in watch
+      dh-autoreconf.
+  * Use dh-autoreconf.
+  * Use GitHub in watch.
 
- -- ChangZhuo Chen (陳昌倬) <czchen@gmail.com>  Tue, 11 Aug 2015 22:54:44 +0800
+  [ Andrew Lee (李健秋) ]
+  * Rewriting copyright file machine-readable format version 1.0.
+  * debian/changelog: added full stops and colons.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Thu, 13 Aug 2015 00:00:54 +0800
 
 scim-chewing (0.3.4-4.1) unstable; urgency=low
 
